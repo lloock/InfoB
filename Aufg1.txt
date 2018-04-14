@@ -29,33 +29,33 @@ Stelle 6:
 - c: {16, 0, 0, 9}			Stelle 2 des Arrays wurde mit sich selbst dezimiert
 
 Stelle 7: 
-- a: 2					Lokales int a der main-Methode
+- a: 2	| 3				Lokales int a der main-Methode; in der for Schleife wurde a++ gerechnet
 - b:  /					Lokal kein b definiert
 - c: {16, 0, 0, 9}			Lokales int Array c
 
 Stelle 8: 
 - a: 23					Klassenvariable a wurde bei initialize auf 23 gesetzt 
-- b: ???				a - 3 ergibt hier -1 und das ist nicht im Array definiert, somit kann auch kein Wert übergeben werden
+- b: ??? | 19				a - 3 ergibt hier -1 und das ist nicht im Array definiert, somit kann auch kein Wert übergeben werden | a war vorher ja 3, 3 + 16 = 19
 - c: /					In dieser Methode ist lokal kein c definiert
 
 Stelle 9: 
-- a: 2					Lokales int a der main-Methode
+- a: 2	| 3				Lokales int a der main-Methode
 - b: 23					Wurde von method() vom static a returned 
 - c: {16, 0, 0, 9}			Lokales int Array c
 
 Stelle 10: 
-- a: 4					Aktueller Parameter: a = 3++
+- a: 4	| 5				Aktueller Parameter: a = 3++
 - b: /					In der Methode ist kein b definiert
 - c: {0,0,0,0}				c wurde lokal neu initialisiert mit default-Werten
 
 Stelle 11: 
-- a: 3					a wurde bei Methodenübergabe inkrementiert
-- b: 23					Lokale Variable b
-- c: {16, 0, 0, 9}			Lokales int Array c
+- a: 3	| 4				a wurde bei Methodenübergabe inkrementiert
+- b: 23	| 12, da b = 7 + 5		Lokale Variable b
+- c: {16, 0, 0, 9}	|8 0 0 9	Lokales int Array c, werden in der Methode werte an c geändert, so wurde die referenz verändert und Änderung bleibt
 
 Stelle 12: 
 - a: 23					Globale static Variable a
-- b: 3					Lokales a = 3 wurde als aktueller Parameter übergeben -> b
+- b: 3	| 4, folgefehler wie oben	Lokales a = 3 wurde als aktueller Parameter übergeben -> b
 - c: /					In der Methode ist kein lokales c definiert
 
 Stelle 13: 
@@ -70,8 +70,8 @@ Stelle 14:
 
 Stelle 15: 
 - a: 23					Wurde von der methode returned
-- b: 23					Lokale Variable b
-- c: {16, 0, 0, 9}			Lokales int Array c	
+- b: 23	| 12	b immer noch 7 + 5	Lokale Variable b
+- c: {16, 0, 0, 9} |	8 0 0 9		Lokales int Array c	
 
 -------------------------------------------------
 Call-by-value: Die aktuellen Parameter für eine Methode werden nach dem Prinzip call-by-value übergaben. Das heißt, der Wert oder die Werte werden kopiert und übergeben, nicht aber die Referenzen auf den Speicherort. Wenn nun Änderungen in der Methode an den Variablen vorgenommen werden, dann beeinflusst das nur die lokalen Kopien, nicht aber die ursprünglichen Variablen, welche die Werte übermittelt haben. Anders ist dies bei call-by-reference.
