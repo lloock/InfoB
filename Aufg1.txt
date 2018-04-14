@@ -1,94 +1,86 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+Stelle 1: 
+- a: 5 					Lokales int a
+- b: / 					Wurde noch nicht definiert
+- c: {16, 4, 2, 9}			Lokales int Array c
 
-\f0\fs24 \cf0 Stelle 1: \
-- a: 5 					Lokales int a\
-- b: / 						Wurde noch nicht definiert\
-- c: \{16, 4, 2, 9\}				Lokales int Array c\
-\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf0 Stelle 2: \
-- a: 23					Static Variable der Klasse 'Fraglich'\
-- b: 0						Lokales int b\
-- c: /						Lokal nicht definiert\
-\
-Stelle 3: \
-- a: 5						Lokales int a \'fcberlagert das static int a der Klasse 'Fraglich'\
-- b: /						Lokal kein b definiert, b der Methode initialize wurde aufgel\'f6st\
-- c: \{16, 4, 2, 9\}				Lokales int Array c\
-\
-Stelle 4: \
-- a: 5						Lokales int a\
-- b: -1					b definiert in der for-Schleife\
-- c: \{16, 4, 2, 9\}				Lokales int Array c\
-\
-Stelle 5: \
-- a: 2						Lokales int a wurde ganzzahlig durch 2 geteilt\
-- b: /						Lokal kein b definiert\
-- c: \{16, 0, 2, 9\}				Stelle 1 wurde mit sich selber dezimiert\
-\
-Stelle 6: \
-- a: 2						for-Schleifen a \'fcberlagert das a der main-Methode\
-- b: 2						Lokales b in der for-Schleife definiert\
-- c: \{16, 0, 0, 9\}				Stelle 2 des Arrays wurde mit sich selbst dezimiert\
-\
-Stelle 7: \
-- a: 2						Lokales int a der main-Methode\
-- b:  /						Lokal kein b definiert\
-- c: \{16, 0, 0, 9\}				Lokales int Array c\
-\
-Stelle 8: \
-- a: 23					Klassenvariable a wurde bei initialize auf 23 gesetzt \
-- b: ???					a - 3 ergibt hier -1 und das ist nicht im Array definiert, somit kann auch kein Wert \'fcbergeben werden\
-- c: /						In dieser Methode ist lokal kein c definiert\
-\
-Stelle 9: \
-- a: 2						Lokales int a der main-Methode\
-- b: 23					Wurde von method() vom static a returned \
-- c: \{16, 0, 0, 9\}				Lokales int Array c\
-\
-Stelle 10: \
-- a: 4						Aktueller Parameter: a = 3++\
-- b: /						In der Methode ist kein b definiert\
-- c: \{0,0,0,0\}				c wurde lokal neu initialisiert mit default-Werten\
-\
-Stelle 11: \
-- a: 3						a wurde bei Methoden\'fcbergabe inkrementiert\
-- b: 23					Lokale Variable b\
-- c: \{16, 0, 0, 9\}				Lokales int Array c\
-\
-Stelle 12: \
-- a: 23					Globale static Variable a\
-- b: 3						Lokales a = 3 wurde als aktueller Parameter \'fcbergeben -> b\
-- c: /						In der Methode ist kein lokales c definiert\
-\
-Stelle 13: \
-- a: 24					\'dcbermittelt wurde 23 und dann inkrementiert\
-- b: /						In der Methode ist kein b definiert\
-- c: \{0,0,0,0\}				c wurde lokal neu initialisiert mit default-Werten 0\
-\
-Stelle 14: \
-- a: 23					Das globale static a\
-- b: 24 					wurde von der zweiten Methode returned als das lokale a\
-- c: /						Lokal ist kein c definiert\
-\
-Stelle 15: \
-- a: 23					Wurde von der methode returned\
-- b: 23					Lokale Variable b\
-- c: \{16, 0, 0, 9\}				Lokales int Array c	\
-\
--------------------------------------------------\
-Call-by-value: Die aktuellen Parameter f\'fcr eine Methode werden nach dem Prinzip call-by-value \'fcbergaben. Das hei\'dft, der Wert oder die Werte werden kopiert und \'fcbergeben, nicht aber die Referenzen auf den Speicherort. Wenn nun \'c4nderungen in der Methode an den Variablen vorgenommen werden, dann beeinflusst das nur die lokalen Kopien, nicht aber die urspr\'fcnglichen Variablen, welche die Werte \'fcbermittelt haben. Anders ist dies bei call-by-reference.\
-\
-Call-by-reference: Werden den Methoden Referenzen des Speicherorts \'fcbergeben, dann beeinflussen die \'c4nderungen in der Methode auch die urspr\'fcnglichen Variablen, da direkt an der Speicheradresse gearbeitet wird und keine Kopie erstellt wurde. \
-\
-Java funktioniert nach dem Prinzip: Call-by-value! \
-\
-\
-\
-\
-	}
+Stelle 2: 
+- a: 23					Static Variable der Klasse 'Fraglich'
+- b: 0					Lokales int b
+- c: /					Lokal nicht definiert
+
+Stelle 3: 
+- a: 5					Lokales int a überlagert das static int a der Klasse 'Fraglich'
+- b: /					Lokal kein b definiert, b der Methode initialize wurde aufgelöst
+- c: {16, 4, 2, 9}			Lokales int Array c
+
+Stelle 4: 
+- a: 5					Lokales int a
+- b: -1					b definiert in der for-Schleife
+- c: {16, 4, 2, 9}			Lokales int Array c
+
+Stelle 5: 
+- a: 2					Lokales int a wurde ganzzahlig durch 2 geteilt
+- b: /					Lokal kein b definiert
+- c: {16, 0, 2, 9}			Stelle 1 wurde mit sich selber dezimiert
+
+Stelle 6: 
+- a: 2					for-Schleifen a überlagert das a der main-Methode
+- b: 2					Lokales b in der for-Schleife definiert
+- c: {16, 0, 0, 9}			Stelle 2 des Arrays wurde mit sich selbst dezimiert
+
+Stelle 7: 
+- a: 2					Lokales int a der main-Methode
+- b:  /					Lokal kein b definiert
+- c: {16, 0, 0, 9}			Lokales int Array c
+
+Stelle 8: 
+- a: 23					Klassenvariable a wurde bei initialize auf 23 gesetzt 
+- b: ???				a - 3 ergibt hier -1 und das ist nicht im Array definiert, somit kann auch kein Wert übergeben werden
+- c: /					In dieser Methode ist lokal kein c definiert
+
+Stelle 9: 
+- a: 2					Lokales int a der main-Methode
+- b: 23					Wurde von method() vom static a returned 
+- c: {16, 0, 0, 9}			Lokales int Array c
+
+Stelle 10: 
+- a: 4					Aktueller Parameter: a = 3++
+- b: /					In der Methode ist kein b definiert
+- c: {0,0,0,0}				c wurde lokal neu initialisiert mit default-Werten
+
+Stelle 11: 
+- a: 3					a wurde bei Methodenübergabe inkrementiert
+- b: 23					Lokale Variable b
+- c: {16, 0, 0, 9}			Lokales int Array c
+
+Stelle 12: 
+- a: 23					Globale static Variable a
+- b: 3					Lokales a = 3 wurde als aktueller Parameter übergeben -> b
+- c: /					In der Methode ist kein lokales c definiert
+
+Stelle 13: 
+- a: 24					Übermittelt wurde 23 und dann inkrementiert
+- b: /					In der Methode ist kein b definiert
+- c: {0,0,0,0}				c wurde lokal neu initialisiert mit default-Werten 0
+
+Stelle 14: 
+- a: 23					Das globale static a
+- b: 24 				Wurde von der zweiten Methode returned als das lokale a
+- c: /					Lokal ist kein c definiert
+
+Stelle 15: 
+- a: 23					Wurde von der methode returned
+- b: 23					Lokale Variable b
+- c: {16, 0, 0, 9}			Lokales int Array c	
+
+-------------------------------------------------
+Call-by-value: Die aktuellen Parameter für eine Methode werden nach dem Prinzip call-by-value übergaben. Das heißt, der Wert oder die Werte werden kopiert und übergeben, nicht aber die Referenzen auf den Speicherort. Wenn nun Änderungen in der Methode an den Variablen vorgenommen werden, dann beeinflusst das nur die lokalen Kopien, nicht aber die ursprünglichen Variablen, welche die Werte übermittelt haben. Anders ist dies bei call-by-reference.
+
+Call-by-reference: Werden den Methoden Referenzen des Speicherorts übergeben, dann beeinflussen die Änderungen in der Methode auch die ursprünglichen Variablen, da direkt an der Speicheradresse gearbeitet wird und keine Kopie erstellt wurde. 
+
+Java funktioniert nach dem Prinzip: Call-by-value! 
+
+
+
+
+	
