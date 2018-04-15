@@ -11,10 +11,9 @@ public class Ticker {
     }
       return ticker;
   }
-  private String enter = System.getProperty( "line.separator" );
 
   public void print(String text) {
-    text = text.replace(enter, " ");
+    text = text.replaceAll("\n", " ");
     System.out.print("+++" + text);
   }
 }
