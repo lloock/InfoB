@@ -13,7 +13,7 @@ public class Ticker {
   }
 
   public void print(String text) {		// method to print one string with the ticker
-    text = text.replaceAll("\n", "");	// replacing line breaks 
+    text = text.replaceAll("\n", " ");	// replacing line breaks with spaces
     System.out.print("+++" + text);
   }
 }
