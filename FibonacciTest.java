@@ -6,7 +6,7 @@
 public class FibonacciTest {
 
 	public static void main(String[] args) {
-		int limit = Integer.parseInt(args([0]);				// I don't know how to read this in
+		int limit = Integer.parseInt(args[0]);			
 		FibonacciPrint.printFibonacci(limit);
 	}
 
