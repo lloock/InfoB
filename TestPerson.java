@@ -5,6 +5,7 @@
  * 
  * Optimization in Student and Person:
  * - Equals could work with the hash values
+ * - Or: in method hashCode() we also use equals() and in method equals() we also use hashCode()
  *
  */
 public class TestPerson {
