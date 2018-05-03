@@ -1,3 +1,9 @@
+/**
+ * Abstract superclass Geometry is the basis for representing points, planes or even volumes
+ * Assumption about all geometries: A 2D plane is flat and a 3D body has as basis this 2D plane and then grows into the height
+ * @author Nina Mainusch
+ *
+ */
 public  abstract class Geometry  {
 
     private int dimension;
