@@ -11,14 +11,7 @@ public class Point2D extends Point {
 	 * @param y coordinate
 	 */
 	public Point2D(double x, double y) {
-		super(2, x, y);
-	}
-
-	/**
-	 * Default consturctor simply uses the superclass default consturctor
-	 */
-	public Point2D() {
-		super();
-	}
+        super(x, y)
+    }
 
 }
