@@ -1,7 +1,7 @@
 /**
  * Class Point2D is a subclass of Point and is only used to handle 2D points more easily
  * @author Louis Loock
- *
+ * @author Nina Mainusch
  */
 public class Point2D extends Point {
 
