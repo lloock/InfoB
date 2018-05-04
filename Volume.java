@@ -21,13 +21,14 @@ public class Volume extends Geometry implements Comparable{
      * @param two second point
      */
     public Volume(Point one, Point two){
+        super(one.dimensions());
         if(one.dimensions() != two.dimensions()) {
             throw new RuntimeException(" You can't create a Volume if the points have different dimensions! ");
         }
-        super(one.dimensions());
+
         // write the points in the array
-        point_1 = new double[points.length];
-        point_2 = new double[points.length];
+        point_1 = new double[one.dimensions()];
+        point_2 = new double[two.dimensions()];
         setVolume(point_1);
         setVolume(point_2);
 
@@ -47,7 +48,7 @@ public class Volume extends Geometry implements Comparable{
      */
     public double volume() {
         double volume = 1;
-        for(double i = 0; i <= point_1.length; i++) {
+        for(int i = 0; i <= point_1.length; i++) {
             volume *= point_1[i] * point_2[i];
         }
         return volume;
