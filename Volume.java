@@ -4,8 +4,6 @@ public class Volume extends Geometry implements Comparable{
 
     private double[] point_1;
     private double[] point_2;
-    //private Point c2; // 3D point which is on the bottom of the volume in the upper right corner
-    //private Point c3; // 3D point which is on the top of the volume right above c1
 
      // TODO: How to infer from two points in a 3D space the 3 points to describe the volume (here: cube)
         // Perhaps a new method is necessary which checks weather the given three points have the right order or are correct to describe the volume
@@ -44,7 +42,7 @@ public class Volume extends Geometry implements Comparable{
     }
     /**
      * Method volume() calculates the volume of this volume.
-     *
+     * @param volume which represents the calculated volume of the Volume
      */
     public double volume() {
         double volume = 1;
@@ -55,75 +53,8 @@ public class Volume extends Geometry implements Comparable{
     }
 
     /**
-     * Method getC1() returns the 3D point of c1
-     * @return c1 is the point at the bottom of the volume in the lower left corner
-     *
-    public Point getC1(){
-        return c1;
-    }
-
-    /**
-     * Method getC2() returns the 3D point of c2
-     * @return c2 is the point at the bottom of the volume in the upper right corner
-     *
-    public Point getC2(){
-        return c2;
-    }
-
-    /**
-     * Method getC3() returns the 3D point of c3
-     * @return c3 is the point at the top of the volume right above c1
-     *
-    public Point getC3(){
-        return c3;
-    }
-    */
-
-    /**
-     * Method setC1(Point c1) sets the point c1 to a new position
-     * @param c1  is the point at the bottom of the volume in the lower left corner
-     * @throw RuntimeException if the new point has not three dimensions
-     * @return true if process was successful
-     *
-    public boolean setC1(Point c1){
-        if(c1.dimensions() != 3){
-            throw new RuntimeException("c1 has an incorrect dimension to set this point of the volume!");
-        }
-        this.c1 = c1;
-        return true;
-    }
-
-    /**
-     * Method setC2(Point c2) sets the point c2 to a new position
-     * @param c2  is the point at the bottom of the volume in the upper right corner
-     * @throw RuntimeException if the new point has not three dimensions
-     * @return true if process was successful
-     *
-    public boolean setC2(Point c2){
-        if(c2.dimensions() != 3){
-            throw new RuntimeException("c2 has an incorrect dimension to set this point of the volume!");
-        }
-        this.c2 = c2;
-        return true;
-    }
-
-    /**
-     * Method setC3(Point c3) sets the point c3 to a new position
-     * @param c3 is the point at the top of the volume right above c1
-     * @throw RuntimeException if the new point has not three dimensions
-     * @return true if process was successful
-     *
-    public boolean setc3(Point c3){
-        if(c3.dimensions() != 3){
-            throw new RuntimeException("c3 has an incorrect dimension to set this point of the volume!");
-        }
-        this.c3 = c3;
-        return true;
-    }
-    */
-
-    /**
      * Method encapsulate(Geometry other) returns a new geometry which encapsulates this volume and the given geometry
+     * @throw RuntimeException if given Geometry is not a volume and not a point
      * @return depending on the type of Geometry of other
      */
     public Geometry encapsulate(Geometry other) {
@@ -131,9 +62,9 @@ public class Volume extends Geometry implements Comparable{
             return null;
         }
         // No clue how to do this
-        if(other instanceof Point){										// volume and point
-            								// delegating this task to the class Point
-        }							// delegating this task to the class Rectangle
+        if(other instanceof Point){			// volume and point
+            // TODO: How to span over a n-dimensional volumen and point?		
+        }					
         if(other instanceof Volume){
             //TODO: How to build a new volume based on two distinct volumes?
             // Maybe go through the lists and take the min/ max? But when to switch? difficult for hugher dimensions ..
@@ -157,7 +88,7 @@ public class Volume extends Geometry implements Comparable{
         }
         if(o instanceof Geometry){
             if(o instanceof Point){
-                return 1;												// TODO: How to compare a n-dimensional point and a volume
+                return 1;								// TODO: How to compare a n-dimensional point and a volume
             }else if(o instanceof Rectangle){
                 return 0;								// TODO: How to compare a plane surface and a volume
             }else if (o instanceof Volume){
