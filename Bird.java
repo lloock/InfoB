@@ -1,4 +1,3 @@
-
 /**
  * A Bird is an animal that can fly.
  *
@@ -10,10 +9,10 @@ public class Bird {
 	public String ability = "Fly";
 	
 	public String getAbility(){
-		return ability;
+		return ability;						// fly
 	}
 	
 	public String allAbilities(){
-		return getAbility();
-	}
+		return getAbility();				// fly
+	}		
 }
