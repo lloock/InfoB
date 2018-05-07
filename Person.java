@@ -13,7 +13,7 @@ public class Person {
    /**
     * Constructor setting the name of this Person.
     *
-    * @param name the name of this Person
+    * @param name is the name of this Person
     */
    public Person(String name) {
       this.name = name;
@@ -44,7 +44,7 @@ public class Person {
          return true;
       }
 
-      if (o instanceof Person) { // is o an instance of Person
+      if (o instanceof Person) { // is o an instance of Person // o.getClass() == Person
          return this.name.equals(((Person) o).getName());  // is this.name equal to the name of o
       }
 
