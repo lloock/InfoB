@@ -1,4 +1,3 @@
-
 /**
  * A Dodo is a flightless bird from Mauritius who died out in 1690.
  *
@@ -9,10 +8,10 @@ public class Dodo extends Bird{
 	public String ability = "Run";
 	
 	public String getAbility(){
-		return super.getAbility();
+		return super.getAbility();				// fly
 	}
 	
 	public String allAbilities(){
-		return ability;
+		return ability;							// run
 	}
 }
