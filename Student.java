@@ -48,7 +48,7 @@ public class Student extends Person {
          return true;
       }
 
-      if (o instanceof Student) {
+      if (o instanceof Student) { // o.getClass() == Student
          return this.matNr == ((Student) o).getMatNr()
                && this.getName().equals(((Student) o).getName());
       }
