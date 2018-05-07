@@ -65,7 +65,6 @@ public class Point extends Geometry implements Comparable{
      * @return a Geometry which spans over all coordinates of the two Geometries
      * @throws RuntimeException if the Geometry is unknown
      */
-
     public Geometry encapsulate(Geometry other) {
         // the dimension of both Geometries must be equal, otherwise we can stop
         if (super.dimensions() != other.dimensions()) {
@@ -98,21 +97,22 @@ public class Point extends Geometry implements Comparable{
      * Implementation of the method compareTo(Object o) form the interface comparable
      * It compares the volumes of these Geometries
      * @param o is an object to which we compare this point
+     * @throw RuntimeException if the object is a point but has a different dimension
      */
     @Override
     public int compareTo(Object o) {
         if(o instanceof Geometry){
             if(o instanceof Point){
                 if(this.dimensions() == ((Point) o).dimensions()){
-                    return 0; // TODO: Howt to compare two points of the same dimension
+                    return 0; // TODO: How to compare two points of the same dimension
                 }else{
                     throw new RuntimeException("The two compared points are uncomparable, because they have different dimensions!");
                 }
             }
             if(o instanceof Volume){
-                return -1; // volume of a point is smaller than volume of a Volume
-            } else { // a geometry which is not a point, not a rectangle and not a volume
-                throw new RuntimeException("The given object is an unknown Geometry! We cannot identify a volume.");
+                return -1; 	// volume of a point is smaller than volume of a Volume
+            }else{ 			// a geometry which is not a point, not a rectangle and not a volume
+                throw new RuntimeException("The given object is an unknown Geometry! We cannot identify it.");
             }
         }else{																		// o is not a geometry and has therefore no volume
             throw new RuntimeException("Given object is not a Geometry! We cannot compare a point and this object.");
