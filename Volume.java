@@ -5,14 +5,6 @@ public class Volume extends Geometry implements Comparable{
     private double[] point_1;
     private double[] point_2;
 
-     // TODO: How to infer from two points in a 3D space the 3 points to describe the volume (here: cube)
-        // Perhaps a new method is necessary which checks weather the given three points have the right order or are correct to describe the volume
-        // And perhaps we even need a method which gets three random corners (3D points) of the volume and uses this as a basis to infer c1-c3
-        // Keep in mind: 3 random 3D points cannot span in our case a volume (they must have a specific relation to each other)
-        // - c1 and c2 have the same z-level, but the x- and y-values are different
-        // - c1 and c3 have the same x- and y-values, but c3 is on a higher z-level
-        // - c2 and c3 are diagonal points in the volume (all values are different)
-
     /**
      * Constructor for building volume
      * @param one first point
@@ -29,8 +21,6 @@ public class Volume extends Geometry implements Comparable{
         point_2 = new double[two.dimensions()];
         setVolume(point_1);
         setVolume(point_2);
-
-
     }
 
     public void setVolume(double... points){
@@ -40,6 +30,7 @@ public class Volume extends Geometry implements Comparable{
             i++;
         }
     }
+    
     /**
      * Method volume() calculates the volume of this volume.
      * @param volume which represents the calculated volume of the Volume
@@ -100,5 +91,4 @@ public class Volume extends Geometry implements Comparable{
             throw new RuntimeException("Volume cannot be compared to this type of object!");
         }
     }
-
 }
