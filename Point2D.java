@@ -11,7 +11,7 @@ public class Point2D extends Point {
 	 * @param y coordinate
 	 */
 	public Point2D(double x, double y) {
-        super(x, y)
+        super(x, y);
     }
 
 }
