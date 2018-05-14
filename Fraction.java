@@ -109,6 +109,7 @@ public class Fraction extends Number {
     return new Fraction(this.numerator*subtrahend.denominator - subtrahend.numerator*this.denominator,
             this.denominator*subtrahend.denominator);
   }
+  
   public String toString() {
     return numerator + " / " + denominator;
   }
@@ -128,6 +129,7 @@ public class Fraction extends Number {
 
       return parsedFraction;
     }
+  
   public boolean equals(Fraction f2) {
     if(this.denominator == f2.getDenominator() && this.numerator == f2.getNumerator()) {
       return true;
