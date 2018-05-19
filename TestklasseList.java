@@ -40,11 +40,21 @@ public class TestklasseList {
         System.out.println("stringsClone2.empty(): " + stringsClone2.empty());
         System.out.println("integersClone2.elem(): " + integersClone2.elem());
         System.out.println("stringsClone2.elem(): " + stringsClone2.elem());
+
+        integers.delete();
+        System.out.println("integers.elem(): " + integers.elem());
+
+        integersClone2.delete();
+        System.out.println("integersClone2.elem(): " + integersClone2.elem());
         System.out.println();
 
         // delete something from the original list, see if entries are deleted in copy too
+        integers.reset();
+        strings.reset();
         integers.delete();
         strings.delete();
+        strings.add("c");
+        integers.add(999);
         System.out.println("integers.elem(): " + integers.elem());
         System.out.println("strings.elem(): " + strings.elem());
         System.out.println("integersClone2.elem(): " + integersClone2.elem());
@@ -52,16 +62,16 @@ public class TestklasseList {
         System.out.println();
 
         // Test operation delete and add some element to clone
-        integersClone2.delete();
+
         integersClone2.add(313);
         System.out.println("integers.elem(): " + integers.elem());
         System.out.println("integersClone2.elem(): " + integersClone2.elem());
-
+        System.out.println();
 
         // Test getClass and inequality for clone elements
-        System.out.println("integers.clone().getClass() == integers.getClass(): (should be true) ");
+        System.out.print("integers.clone().getClass() == integers.getClass(): (should be true) ");
         System.out.println(integers.clone().getClass() == integers.getClass());
-        System.out.println("integers.clone() != integers: (should be true) ");
+        System.out.print("integers.clone() != integers: (should be true) ");
         System.out.println(integers.clone() != integers);
 
         // Test the equality of instance and clone
