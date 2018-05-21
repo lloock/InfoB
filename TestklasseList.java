@@ -1,14 +1,18 @@
+/**
+ * Tests the Generic List and its Entries, especially the method clone() 
+ * @author Nina Mainusch 
+ */
 public class TestklasseList {
 
     public static void main(String[] args) {
 
         // Create some generic lists and instances
-        GenericList<Integer> integers = new GenericList<>();
-        System.out.println("GenericList<Integer> integers = new GenericList<>();");
+        GenericList<Integer> integers = new GenericList<Integer>();
+        System.out.println("GenericList<Integer> integers = new GenericList<Integer>();");
         GenericList<Integer> integersClone = integers.clone();
         System.out.println("GenericList<Integer> integersClone = integers.clone();");
-        GenericList<String> strings = new GenericList<>();
-        System.out.println("GenericList<String> strings = new GenericList<>();");
+        GenericList<String> strings = new GenericList<String>();
+        System.out.println("GenericList<String> strings = new GenericList<String>();");
         GenericList<String> stringsClone = strings.clone();
         System.out.println("GenericList<String> stringsClone = strings.clone();");
         System.out.println();
@@ -25,6 +29,7 @@ public class TestklasseList {
         System.out.println("strings.elem(): " + strings.elem());
         System.out.println("integersClone.empty(): " + integersClone.empty());
         System.out.println("stringsClone.empty(): " + stringsClone.empty());
+
         integers.add(2);
         strings.add("b");
         System.out.println("integers.add(2)");
@@ -79,5 +84,42 @@ public class TestklasseList {
         System.out.println("strings.clone().equals(strings): (should be true) " + strings.clone().equals(strings));
         System.out.println();
 
+        integers.advance();
+        integers.add(42);
+        integers.advance();
+        integers.add(21);
+        integers.advance();
+        integers.add(13);
+
+        integers.reset();
+        while(!integers.endpos()) {
+            System.out.println(integers.elem());
+            integers.advance();
+        }
+        System.out.println();
+        GenericList<Integer> intFinalClone = integers.clone();
+
+        intFinalClone.reset();
+        while(!intFinalClone.endpos()) {
+            System.out.println(intFinalClone.elem());
+            intFinalClone.advance();
+        }
+        intFinalClone.reset();
+        intFinalClone.advance();
+        intFinalClone.delete();
+
+        System.out.println();
+        integers.reset();
+        while(!integers.endpos()) {
+            System.out.println(integers.elem());
+            integers.advance();
+        }
+        System.out.println();
+
+        intFinalClone.reset();
+        while(!intFinalClone.endpos()) {
+            System.out.println(intFinalClone.elem());
+            intFinalClone.advance();
+        }
     }
 }
