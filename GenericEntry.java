@@ -23,13 +23,25 @@ public class GenericEntry<E> implements Cloneable {
         this.next = e;
     }
 
+    /**
+     * The clone method calls super.clone() to obtain the cloned object reference
+     * the clone() method should perform any required modifications
+     * on the object before returning it, in this case it clones the entries of the Generic List
+     *
+     * @catch CloneNotSupportedException unless the object is an instance of a class that implements the marker interface Cloneable
+     * @throw Error if Exception got caught
+     * @return the cloned entry
+     */
+
     @Override
     public GenericEntry<E> clone() {
         try {
             GenericEntry<E> clone;
-
+            // Every class that implements clone() should call
+            // super.clone() to obtain the cloned object reference
             clone = (GenericEntry<E>) super.clone();
 
+            // Clone also the next entry
             if (next != null) {
                 clone.next = next.clone();
             }
