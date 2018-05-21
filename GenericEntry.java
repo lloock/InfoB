@@ -36,11 +36,10 @@ public class GenericEntry<E> implements Cloneable {
     @Override
     public GenericEntry<E> clone() {
         try {
-            GenericEntry<E> clone;
+            
             // Every class that implements clone() should call
             // super.clone() to obtain the cloned object reference
-            clone = (GenericEntry<E>) super.clone();
-
+            GenericEntry<E> clone = (GenericEntry<E>) super.clone();
             // Clone also the next entry
             if (next != null) {
                 clone.next = next.clone();
