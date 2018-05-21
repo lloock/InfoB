@@ -108,11 +108,22 @@ public class GenericList<E> implements Cloneable {
     }
 
 
+    /**
+     * The clone() method creates a deep copy of the list
+     * class Object's clone() method creates and returns a copy of the object, with the same class and
+     * with all the fields having the same values.
+     *
+     * @catch CloneNotSupportedException unless the object is an instance of a class that implements the marker interface Cloneable
+     * @throw Error if Exception got caught
+     * @return the cloned list
+     */
     @Override
     public GenericList<E> clone() {
         try {
+            // super.clone() goes up to Object.clone() and creates and returns a copy of the object
             GenericList<E> clone = (GenericList<E>) super.clone();
-            //GenericList<E> clone = new GenericList<E>();
+
+            // clone the beginning and the actual position to get a deep copy
             clone.begin = begin.clone();
             clone.pos = pos.clone();
 
@@ -130,6 +141,9 @@ public class GenericList<E> implements Cloneable {
             return true;
         }
         if(object == null) {
+            return false;
+        }
+        if(this == null) {
             return false;
         }
         if(this.getClass() == object.getClass()) {
