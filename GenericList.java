@@ -109,7 +109,7 @@ public class GenericList<E> implements Cloneable {
 
 
     /**
-     * The clone() method creates a deep copy of the list
+     * The clone() method creates a shallow copy of the list with the behaviour of a deep copy since we also copy the entries
      * class Object's clone() method creates and returns a copy of the object, with the same class and
      * with all the fields having the same values.
      *
@@ -128,9 +128,8 @@ public class GenericList<E> implements Cloneable {
             clone.pos = pos.clone();
 
             return clone;
-        }
-        catch(CloneNotSupportedException e) {
-            throw new Error();
+        } catch(CloneNotSupportedException e) { // Checked exception
+            throw new InternalError(e);
         }
     }
 
