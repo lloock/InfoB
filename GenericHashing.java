@@ -26,7 +26,7 @@ public class GenericHashing<T> implements util.HashSet<T> {
         this.array = new GenericList[arraylength];
         for (int i = 0; i < arraylength; i++) {
             this.array[i] = new GenericList<T>();
-            
+
         }
     }
     /**
@@ -91,7 +91,7 @@ public class GenericHashing<T> implements util.HashSet<T> {
             list.advance();
         }
         list.reset();
-        //return false;
+        return false;
     }
 
     /**
@@ -100,7 +100,11 @@ public class GenericHashing<T> implements util.HashSet<T> {
      * <code>HashFunction</code>.
      */
     public boolean equals(T o1, T o2) {
-      // TODO how to implement this? Even necessary? OR at the right place here?
+        if (o1.equals(o2)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -109,9 +113,15 @@ public class GenericHashing<T> implements util.HashSet<T> {
      * this <code>HashFunctions</code>.
      */
     public int hashCode(T o) {
-    
-      // TODO how to implement this? Even necessary? OR at the right place here?
+        //TODO: where is the hashvalue written? Wo übergiebt man ihn?
+        // Just used dummys because I dont know where to get the hashvalues
 
+        int value = 34564;
+        int hashWert = 354;
+        while(hashWert > 9) {
+            hashWert = value % 10;
+        }
+        return hashWert;
     }
-
 }
+
