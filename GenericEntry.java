@@ -2,7 +2,7 @@
 /**
  * An Entry holds an generic Object o and a reference next to
  * the next Entry such that a linked List of Entry elements is generated.
- *
+ * Implements Cloneable interface (marker Interface)
  * @author Nina Mainusch
  */
 public class GenericEntry<E> implements Cloneable {
@@ -36,7 +36,7 @@ public class GenericEntry<E> implements Cloneable {
     @Override
     public GenericEntry<E> clone() {
         try {
-            
+
             // Every class that implements clone() should call
             // super.clone() to obtain the cloned object reference
             GenericEntry<E> clone = (GenericEntry<E>) super.clone();
@@ -45,9 +45,8 @@ public class GenericEntry<E> implements Cloneable {
                 clone.next = next.clone();
             }
             return clone;
-        }
-        catch(CloneNotSupportedException e) {
-            throw new Error();
+        } catch(CloneNotSupportedException e) { // Checked Exception
+            throw new InternalError(e);
         }
 
     }
