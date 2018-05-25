@@ -39,15 +39,6 @@ public class HashTestKlasse {
         System.out.println("third.contains(3.141592653589793) = " + third.contains(3.141592653589793));
         System.out.println("third.delete(3.141592) = " + third.delete(3.141592));
         System.out.println("third.delete(3.141592653589793) = " + third.delete(3.141592653589793));
-        /**
-        // Default
-        GenericHashing<> t;
-
-        HashFunction<? super Number> ts; // Upper bound
-        <? extends Number> // Lower bound
-        HashSet<Number> hs;
-        }
-         */
-
+        
     }
 }
