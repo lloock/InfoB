@@ -1,6 +1,5 @@
 
 import java.util.HashSet;
-
 /**
  * Implementieren Sie eine Klasse in der Objekte typsicher nach dem Prinzip des
  offenen Hashings ab- gelegt werden können. Die Klasse soll das gegebene Interface
@@ -15,8 +14,6 @@ import java.util.HashSet;
 public class GenericHashing<T> implements util.HashSet<T> {
 
     private GenericList<T>[] array;
-    private T value;
-
 
     public GenericHashing() {
         this(10);
@@ -26,7 +23,6 @@ public class GenericHashing<T> implements util.HashSet<T> {
         this.array = new GenericList[arraylength];
         for (int i = 0; i < arraylength; i++) {
             this.array[i] = new GenericList<T>();
-
         }
     }
     /**
@@ -40,6 +36,7 @@ public class GenericHashing<T> implements util.HashSet<T> {
         }
         int code = hashCode(o);
         GenericList list = array[code];
+        list.reset();
         while(!list.endpos()) {
             if (list.elem().equals(o)) {
                 return true;
@@ -63,9 +60,9 @@ public class GenericHashing<T> implements util.HashSet<T> {
         if(contains(o)) {
             return false;
         }
-        int code = hashCode((T) o);
+        int code = hashCode(o);
         GenericList list = array[code];
-        list.add((T) o);
+        list.add(o);
         list.reset();
         return true;
 
@@ -94,33 +91,25 @@ public class GenericHashing<T> implements util.HashSet<T> {
         return false;
     }
 
-    /**
-     * Defines the equality of two objects as defined by {@link Object#equals(Object)}
-     * but in relation to the {@link HashFunction#hashCode(Object)} method in this
-     * <code>HashFunction</code>.
-     */
-    public boolean equals(T o1, T o2) {
-        if (o1.equals(o2)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
+     /**
      * Defines the hash code of an object as defined by {@link Object#hashCode()}
      * but in relation to the {@link HashFunction#equals(Object, Object)} method in
      * this <code>HashFunctions</code>.
      */
     public int hashCode(T o) {
-        //TODO: where is the hashvalue written? Wo übergiebt man ihn?
-        // Just used dummys because I dont know where to get the hashvalues
 
-        int value = 34564;
-        int hashWert = 354;
-        while(hashWert > 9) {
-            hashWert = value % 10;
+        int hashWert = array.length;
+        int hashCode = o.hashCode();
+        int mod = 1000;
+        if (hashCode < 0) {
+            hashCode = hashCode * (-1);
         }
+
+        while(hashWert > array.length - 1) {
+            hashWert = hashCode % mod;
+            mod = mod / 10;
+        }
+
         return hashWert;
     }
 }
