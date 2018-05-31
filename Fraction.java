@@ -1,206 +1,180 @@
-//package de.uos.Binf;
-import java.lang.Math;
 import java.util.HashMap;
-import java.util.Objects;
 
 /**
- * This class produces Fractions (numerator / denominator)
+ * Every instance of Fraction represents a fraction with numerator and
+ * decorator. Fraction instances may be instantiated via
+ * {@link #newFraction(int, int)}, {@link #newFraction(int)} or
+ * {@link #parseFraction(String)}. Fraction instances are cancelled within
+ * instantiation. Equal Fraction instances will have the same reference, e.g.
+ * </br>
+ * <code>Fraction.parseFraction("1/2") == Fraction.parseFraction("2/4")</code>
+ * </br> delivers <code>true</code>
+ *
  * @author Nina Mainusch
  * @author Louis Look
+ *
  */
 public class Fraction extends Number {
 
-    private int numerator;
-    private int denominator;
-
     private static HashMap<Fraction, Fraction> fractionHashMap = new HashMap<>();
 
+    /**
+     * The regular expression that defines the String representation of a
+     * Fraction.
+     */
+    public static final String REGEX = "-?\\d+/[1-9]\\d*";
 
+
+    /**
+     * Creates a Fraction object with numerator and denominator 1.
+     *
+     * @param numerator
+     *
+     * @return the created Fraction, may have the same reference as an already
+     *         created but equal Fraction
+     */
     public static Fraction newFraction(int numerator) {
-
         Fraction frac = new Fraction(numerator, 1);
         return frac.newFraction(numerator, 1);
-
     }
 
-
+    /**
+     * Creates a Fraction object with numerator and denominator, cancels the
+     * fraction by creation. Denominator == 0 is not allowed. Throws Exception if
+     * <code>denominator</code> is 0.
+     *
+     * @param numerator
+     * @param denominator
+     *
+     * @throws NumberFormatException
+     *            if <code>denominator</code> ist 0
+     *
+     * @return the created Fraction, may have the same reference as an already
+     *         created but equal Fraction
+     */
     public static Fraction newFraction(int numerator, int denominator) {
 
-        Fraction frac = new Fraction(numerator, denominator);
-        if (fractionHashMap.containsKey(frac)) {
-            return fractionHashMap.get(frac);
-        } else {
-            fractionHashMap.put(frac, frac);
-            return frac;
-        }
-    }
-    /**
         Fraction frac = new Fraction(numerator, denominator);
 
         try {
             // Works only if value exists, else NullPointerException
-
             Fraction gotValue = fractionHashMap.get(frac);
-
+            
             if (gotValue.equals(frac)) {
-                return fractionHashMap.get(frac);
+                return gotValue;
             } else {
                 fractionHashMap.put(frac, frac);
-
                 return frac;
             }
 
             //return fractionHashMap.get(frac); // If frac is already in the HashMap: Return it
 
         } catch (NullPointerException e ) { // Else put it in the HashMap
+            
             fractionHashMap.put(frac, frac);
 
             return frac;
         }
 
     }
-     */
+
     /**
-     * First Constructor: creates an object with just a numerator
+     * Creates greatest common divisor for a and b.
+     *
+     * @param a
+     * @param b
+     * @return the greatest common divisor for a and b.
+     */
+    public static int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+
+    }
+
+    /**
+     * Parses a Fraction from a String by using REGEX. Throws
+     * NumberFormatException if String s does not contain valid Fraction.
+     *
+     * @param s
+     *           String to be parsed
+     * @return parsed String as Fraction,, may have the same reference as an
+     *         already created but equal Fraction
+     * @throws NumberFormatException
+     *            if String s is not a valid Fraction
+     */
+    public static Fraction parseFraction(String s) {
+        if (!s.matches(REGEX)) {
+            throw new NumberFormatException("Parsing error");
+        }
+        String[] splitted = s.split("/");
+        return newFraction(Integer.parseInt(splitted[0]),
+                Integer.parseInt(splitted[1]));
+    }
+
+    private int denominator;
+
+    private int numerator;
+
+    /**
+     * Creates a Fraction object with numerator and denominator 1, cancels the
+     * fraction with creation.
+     *
      * @param numerator
-     **/
+     */
     private Fraction(int numerator) {
         this(numerator, 1);
-
     }
 
     /**
-     * Second Constructor: creates an object with a numerator and a denominator
+     * Creates a Fraction object with numerator and denominator, cancels the
+     * fraction by creation. Denominator == 0 is not allowed.
+     *
      * @param numerator
      * @param denominator
-     **/
+     */
     private Fraction(int numerator, int denominator) {
-
-        // Dividing by 0 is never a good idea
         if (denominator == 0) {
-            throw new RuntimeException("\n" + " It is not possible to divide something by 0. Sorry.");
+            throw new RuntimeException("denominator == 0 is not possible");
         }
 
-        // check if there are negative numbers, since euclid would not work for them
-        boolean isNegative = false;
-        if (numerator < 0 && denominator < 0) {
-            numerator *= -1;
-            denominator *= -1;
-        } else if (numerator < 0 ) {
-            numerator *= -1;
-            isNegative = true;
-
-        } else if (denominator < 0) {
-            denominator *= -1;
-            isNegative = true;
+        /*
+         * creates greatest common divisior.
+         */
+        int gcd = Fraction.gcd(numerator, denominator);
+        /*
+         * check sign, make denominator positive
+         */
+        if (denominator / gcd < 0) {
+            gcd *= -1;
         }
 
-        int ggt = Fraction.ggt(numerator, denominator);
-        this.numerator = numerator / ggt;
-        this.denominator = denominator / ggt;
+        this.numerator = numerator / gcd;
 
-        if (isNegative) {
-            this.numerator *= -1;
-        }
-    }
-
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numerator, denominator);
+        this.denominator = denominator / gcd;
     }
 
     /**
-     * Finds the greatest common divisor using the euclidean algorithm
-     * @param x
-     * @param y
-     * @return greatest common divisor
+     * Adds addend to this Fraction and return the result as a new Fraction.
+     *
+     * @param addend
+     *           Fraction to be added
+     * @return the sum as a new Fraction
      */
-    public static int ggt(int x, int y) {
-        // Using the simple Euclidean algorithm
-        while (y != 0) {
-            if (x > y) {
-                x = x - y;
-            } else {
-                y = y - x;
-            }
-        }
-        return x;
-    }
-
-    public int getDenominator() {
-        return this.denominator;
-    }
-
-    public int getNumerator() {
-        return this.numerator;
-    }
-
-    public Fraction multiply(int factor) {
-        return newFraction(numerator * factor, denominator);
-    }
-
-    public Fraction multiply(Fraction factor) {
-        return newFraction(numerator * factor.numerator, denominator * factor.denominator);
-    }
-
-    public Fraction divide(Fraction divisor) {
-        return newFraction(numerator * divisor.denominator, denominator * divisor.numerator);
-    }
-
-    public Fraction multiply(Fraction... factors) {
-        Fraction result = newFraction(1,1);
-        for(Fraction elem:factors) {
-            result = result.multiply(elem);
-        }
-        return result;
-    }
-
     public Fraction add(Fraction addend) {
-        return newFraction(this.numerator*addend.denominator + addend.numerator*this.denominator,
-                this.denominator*addend.denominator);
+        return newFraction(this.numerator * addend.denominator
+                + this.denominator * addend.numerator, this.denominator
+                * addend.denominator);
     }
 
-    public Fraction subtract(Fraction subtrahend) {
-        return newFraction(this.numerator*subtrahend.denominator - subtrahend.numerator*this.denominator,
-                this.denominator*subtrahend.denominator);
-    }
-
-    public String toString() {
-        return numerator + " / " + denominator;
-    }
-
-    public static Fraction parseFraction(String fractionString) {
-        // checks whether the string is really a fraction
-        // The parameter matches gets is the regular expression representing a fraction
-        // ? stands for optional sign, \d for [0-9]
-        if(!fractionString.matches("-?\\d+/[1-9]\\d*")) {
-            throw new RuntimeException(" The string is not representing a fraction");
-        }
-
-        String[] split = fractionString.split("/");
-        // Use the method parseInt to change from the character presentation
-        // to the corresponding integer
-        Fraction parsedFraction = newFraction(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
-
-        return parsedFraction;
-    }
-
-    public boolean equals(Fraction f2) {
-        if (this == null) {
-            return false;
-        }
-
-        if (f2 == null) {
-            return false;
-        }
-
-        if(this.denominator == f2.getDenominator() && this.numerator == f2.getNumerator()) {
-            return true;
-        }else {
-            return false;
-        }
-
+    /**
+     * Divides this Fraction with another Fraction
+     *
+     * @param another
+     *           Fraction to divide this Fraction by
+     * @return quotient as a new Fraction
+     */
+    public Fraction divide(Fraction another) {
+        return newFraction(this.numerator * another.denominator,
+                this.denominator * another.numerator);
     }
 
     @Override
@@ -209,18 +183,122 @@ public class Fraction extends Number {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Fraction other = (Fraction) obj;
+        if (denominator != other.denominator)
+            return false;
+        if (numerator != other.numerator)
+            return false;
+        return true;
+    }
+
+    @Override
     public float floatValue() {
         return (float) doubleValue();
     }
 
+    /**
+     *
+     * @return denominator of this Fraction
+     */
+    public int getDenominator() {
+        return this.denominator;
+    }
+
+    /**
+     *
+     * @return numerator of this Fraction
+     */
+    public int getNumerator() {
+        return this.numerator;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + denominator;
+        result = prime * result + numerator;
+        return result;
+    }
+
     @Override
     public int intValue() {
-        return (int) doubleValue();
+        return (int) (doubleValue() + 0.5);
     }
 
     @Override
     public long longValue() {
-        return (long) doubleValue();
+        return (long) (doubleValue() + 0.5);
     }
 
+    /**
+     * Multiplies this Fraction with another Fraction
+     *
+     * @param another
+     *           Fraction to multiply this Fraction with
+     * @return product as a new Fraction
+     */
+    public Fraction multiply(Fraction another) {
+        return newFraction(this.numerator * another.numerator, this.denominator
+                * another.denominator);
+    }
+
+    /**
+     * Multiplies this Fraction with all other Fraction instances given by
+     * factors
+     *
+     * @param factors
+     *           Fraction instances to multiply this Fraction with
+     * @return product as a new Fraction
+     */
+    public Fraction multiply(Fraction... factors) {
+        Fraction result = this;
+        for (int i = 0; i < factors.length; i++) {
+            result = result.multiply(factors[i]);
+        }
+        return result;
+    }
+
+    /**
+     * Multiplies this Fraction with n.
+     *
+     * @param n
+     *           factor to multiply with
+     * @return product as a new Fraction
+     */
+    public Fraction multiply(int n) {
+        return newFraction(this.numerator * n, this.denominator);
+    }
+
+    /**
+     * Subtracts subtrahend from this Fraction an returns the result as a new
+     * Fraction.
+     *
+     * @param subtrahend
+     *           to be substracted Fraction
+     * @return the difference as a new Fraction
+     */
+    public Fraction substract(Fraction subtrahend) {
+        return newFraction(this.numerator * subtrahend.denominator
+                - this.denominator * subtrahend.numerator, this.denominator
+                * subtrahend.denominator);
+    }
+
+    /**
+     * Returns a string representation of this Fraction such as
+     * numerator/denominator.
+     *
+     * @return This Fraction as a String
+     */
+    @Override
+    public String toString() {
+        return numerator + "/" + denominator;
+    }
 }
