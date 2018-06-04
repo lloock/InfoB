@@ -1,3 +1,4 @@
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -21,7 +22,7 @@ public class ListIterator<E> implements Iterator<E> {
 	@Override
 	public E next() {
 		if(currentModCount != list.modCount()){ // fail-fast iterator: only returns the next element, if the list did not changed
-			throw new RuntimeException("ModCount of the Iterator is not equal to the modCount of the List!");
+			throw new ConcurrentModificationException("ModCount of the Iterator is not equal to the modCount of the List!");
 		}
 		
 		if(hasNext()){				// if there is a next element
