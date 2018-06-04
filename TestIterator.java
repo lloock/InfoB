@@ -1,3 +1,4 @@
+import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 
 /**
@@ -41,7 +42,7 @@ public class TestIterator {
 		
 		try{
 			iterator.next(); // trying to get the next element, which is not possible because the GenericList has been changed
-		}catch(RuntimeException exc){
+		}catch(ConcurrentModificationException exc){
 			System.out.println("The List has been changed, therefore the Iterator failed!");
 		}
 		
