@@ -1,0 +1,9 @@
+package Blatt8;
+public class Beispiel:
+cat dog cat cat
+a cat can be an animal.
+cats are awesome. In general I like cats
+no cat here
+dog
+dog
+cat 10.0
